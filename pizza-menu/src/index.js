@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import "./index.css";
 
 const pizzaData = [
   {
@@ -49,7 +50,7 @@ const pizzaData = [
 function App() {
   return (
     //?Remember a component can only hold 1 div /parent element
-    <div>
+    <div className="container">
       <Header />
       <Menu />
       <Footer />
@@ -59,39 +60,80 @@ function App() {
 
 //? Component for the header
 function Header() {
+  //const style = { color: "red", fontSize: "48px", textTransform: "uppercase" };
+  const style = {};
   return (
-    <div>
-      <h2>Fast React Pizza Company</h2>
-    </div>
+    <header className="header">
+      <h1 style={style}>Dee's React Pizza Co.</h1>
+    </header>
   );
 }
 
 //? Component for the menu
 function Menu() {
   return (
-    <div>
+    <main className="menu">
       <h2>Our Menu</h2>
-      <Pizza />
-      <Pizza />
-      <Pizza />
-    </div>
+
+      {/*? we can use the map function to loop through the array of pizza objects*/}
+      <ul className="pizzas">
+        {pizzaData.map((pizza) => (
+          <Pizza pizzaObj={pizza} key={pizza.name} />
+        ))}
+      </ul>
+      {/*<Pizza
+        name="Pizza Spinaci"
+        ingredients="Tomato, mozarella, spinach, and ricotta cheese"
+        price={10}
+        photoName="pizzas/spinaci.jpg"
+      />
+
+      <Pizza
+        name="Pizza Funghi"
+        ingredients="Tomato, mushrooms, cheese, and chillie flakes"
+        price={13}
+        photoName="pizzas/funghi.jpg"
+      />*/}
+    </main>
+  );
+}
+
+//?the props object represents the properties of the component in this case the name value, ingredients value price value and photoName value and this is passed to the child component. The pizzaObj is passed to the pizza component as a props object. This is a way of passing data from a parent component to a child component.
+
+function Pizza(props) {
+  return (
+    <li className="pizza">
+      <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
+      <div>
+        <h3>{props.pizzaObj.name}</h3>
+        <p>{props.pizzaObj.ingredients}</p>
+        <span>{props.pizzaObj.price}</span>
+      </div>
+    </li>
   );
 }
 
 //? Component for the footer
 function Footer() {
-  return (
-    <footer>{new Date().toLocaleTimeString()}.We're currently open</footer>
-  );
-}
+  const hour = new Date().getHours();
+  const openHour = 12;
+  const closeHour = 22;
+  const isOpen = hour >= openHour && hour <= closeHour;
+  console.log(isOpen);
 
-function Pizza() {
+  //if (hour >= openHour && hour <= closeHour) alert("We are open");
+  //else alert("We are closed");
+
+  //?with && if the first part is true the second part will be returned, with || if the first part is false the second part will be returned
   return (
-    <div>
-      <img src="pizzas/spinaci.jpg" alt="pizza spinact" />
-      <p>Tomato, mozarella, spinach, and ricotta cheese</p>
-      <h2>Pizza Spinaci</h2>
-    </div>
+    <footer className="footer">
+      {isOpen && (
+        <div className="order">
+          <p>We're open until {closeHour}:00. Come visit us or order online.</p>
+          <button className="btn">Order</button>
+        </div>
+      )}
+    </footer>
   );
 }
 
