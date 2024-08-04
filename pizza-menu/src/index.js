@@ -60,54 +60,58 @@ function App() {
 
 //? Component for the header
 function Header() {
-  //const style = { color: "red", fontSize: "48px", textTransform: "uppercase" };
-  const style = {};
   return (
     <header className="header">
-      <h1 style={style}>Dee's React Pizza Co.</h1>
+      <h1>Dee's React Pizza Co.</h1>
     </header>
   );
 }
 
 //? Component for the menu
 function Menu() {
+  const pizzas = pizzaData;
+  //const pizzas = [];
+  const numPizzas = pizzas.length;
+
   return (
     <main className="menu">
       <h2>Our Menu</h2>
 
       {/*? we can use the map function to loop through the array of pizza objects*/}
-      <ul className="pizzas">
-        {pizzaData.map((pizza) => (
-          <Pizza pizzaObj={pizza} key={pizza.name} />
-        ))}
-      </ul>
-      {/*<Pizza
-        name="Pizza Spinaci"
-        ingredients="Tomato, mozarella, spinach, and ricotta cheese"
-        price={10}
-        photoName="pizzas/spinaci.jpg"
-      />
-
-      <Pizza
-        name="Pizza Funghi"
-        ingredients="Tomato, mushrooms, cheese, and chillie flakes"
-        price={13}
-        photoName="pizzas/funghi.jpg"
-      />*/}
+      {numPizzas > 0 ? (
+        <>
+          {/*here we are using react fragment <> to include more then 1 element in jsx, being p and ul elements */}
+          <p>
+            Authentic Italian cuisine. 6 creative dishes to choose from. All
+            from our stone ovens, all organic, all delicious.
+          </p>
+          <ul className="pizzas">
+            {pizzas.map((pizza) => (
+              <Pizza pizzaObj={pizza} key={pizza.name} />
+            ))}
+          </ul>
+        </>
+      ) : (
+        <p>We are still working on the menu. Please come back later.</p>
+      )}
     </main>
   );
 }
 
 //?the props object represents the properties of the component in this case the name value, ingredients value price value and photoName value and this is passed to the child component. The pizzaObj is passed to the pizza component as a props object. This is a way of passing data from a parent component to a child component.
 
-function Pizza(props) {
+//?destructure the props object to get the name, ingredients, price, and photoName values, so props destructures to pizzaObj. The pizzaObj is passed to the pizza component as a props object. This is a way of passing data from a parent component to a child component. pizzaObj/ becomes pizzaObj
+
+function Pizza({ pizzaObj }) {
+  //if (pizzaObj.soldOut) return null;
+
   return (
-    <li className="pizza">
-      <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
+    <li className={`pizza ${pizzaObj.soldOut ? "sold-out" : ""}`}>
+      <img src={pizzaObj.photoName} alt={pizzaObj.name} />
       <div>
-        <h3>{props.pizzaObj.name}</h3>
-        <p>{props.pizzaObj.ingredients}</p>
-        <span>{props.pizzaObj.price}</span>
+        <h3>{pizzaObj.name}</h3>
+        <p>{pizzaObj.ingredients}</p>
+        <span>{pizzaObj.soldOut ? "SOLD OUT" : pizzaObj.price}</span>
       </div>
     </li>
   );
@@ -116,24 +120,33 @@ function Pizza(props) {
 //? Component for the footer
 function Footer() {
   const hour = new Date().getHours();
-  const openHour = 12;
+  const openHour = 7;
   const closeHour = 22;
   const isOpen = hour >= openHour && hour <= closeHour;
   console.log(isOpen);
 
-  //if (hour >= openHour && hour <= closeHour) alert("We are open");
-  //else alert("We are closed");
-
   //?with && if the first part is true the second part will be returned, with || if the first part is false the second part will be returned
   return (
     <footer className="footer">
-      {isOpen && (
-        <div className="order">
-          <p>We're open until {closeHour}:00. Come visit us or order online.</p>
-          <button className="btn">Order</button>
-        </div>
+      {isOpen ? (
+        <Order openHour={openHour} closeHour={closeHour} />
+      ) : (
+        <p>
+          We are happy to welcome you between {openHour}:00 and {closeHour}:00
+        </p>
       )}
     </footer>
+  );
+}
+
+function Order({ closeHour, openHour }) {
+  return (
+    <div className="order">
+      <p>
+        {`We're open from ${""} ${openHour}:00 until ${closeHour}:00. Come visit us or order online.`}
+      </p>
+      <button className="btn">Order</button>
+    </div>
   );
 }
 
