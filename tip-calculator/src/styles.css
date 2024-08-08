@@ -1,0 +1,120 @@
+body {
+  font-family: "Arial", sans-serif;
+  margin: 20px;
+  background-color: #f4f4f4;
+}
+
+.app {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 40px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  color: white;
+  background-color: black;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+label {
+  display: block;
+  margin-bottom: 20px;
+  font-size: 1.2em;
+  color: #f6f3f3;
+}
+
+input,
+select {
+  display: block;
+  margin-top: 10px;
+  padding: 10px;
+  font-size: 1em;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+}
+
+button {
+  margin-top: 20px;
+  padding: 12px 20px;
+  font-size: 1em;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+h3 {
+  margin-top: 30px;
+  font-size: 1.5em;
+  color: #007bff;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .app {
+    padding: 15px;
+    border-radius: 8px;
+  }
+
+  label {
+    font-size: 1.1em;
+  }
+
+  input,
+  select {
+    padding: 8px;
+    font-size: 0.9em;
+  }
+
+  button {
+    padding: 10px 15px;
+    font-size: 0.9em;
+  }
+
+  h3 {
+    font-size: 1.2em;
+  }
+}
+/*Explanation
+Body:
+
+Applied a light gray background color for a subtle backdrop.
+Used a clean font for better readability.
+App Container:
+
+Increased the maximum width to 500px for a more spacious layout.
+Added padding, border radius, background color, and a slight box shadow to enhance the card appearance.
+Labels:
+
+Increased font size and added more margin for better spacing.
+Changed the color to a darker shade for better contrast.
+Inputs and Selects:
+
+Increased padding and added a border radius for a more modern look.
+Added focus styles to enhance usability.
+Buttons:
+
+Increased padding and font size.
+Added a transition effect and hover state to improve interactivity.
+Headings (h3):
+
+Centered the text and applied the primary color to match the button.
+Media Queries:
+
+Improved responsiveness by adjusting padding, font sizes, and border radius for smaller screens.
+These changes should make the Tip Calculator look more polished and user-friendly across different devices.
+
+*/
