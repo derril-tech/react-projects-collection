@@ -53,7 +53,7 @@ body {
 }
 
 .buttons button {
-  border: none;
+  border: solid black 2px;
   cursor: pointer;
   padding: 10px 15px;
   border-radius: 100px;
