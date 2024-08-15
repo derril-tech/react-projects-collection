@@ -15,11 +15,11 @@
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/derril-tech/eat-n-split.git
+   git clone https://github.com/derril-tech/06.eat-n-split.git
    ```
 2. Navigate to the project directory:
    ```bash
-   cd eat-n-split
+   cd 06.eat-n-split
    ```
 3. Install the dependencies:
    ```bash
